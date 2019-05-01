@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="ImageToolApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ImageToolApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    Unloaded="Page_Unloaded"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+<!--
+Colors:
+    Canvas background: DimGray
+    UI background: Gray
+    Buttons: LightSlateGray
+    Debug: Magenta
+-->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="Gray"/>
+        <Border Grid.Row="1" Grid.Column="0" Background="Gray"/>
+        <Border Grid.Row="1" Grid.Column="1" Background="Magenta"/>
+        <Border Grid.Row="2" Grid.ColumnSpan="2" Background="DarkSlateGray"/>
+        <!--Ribbon-->
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Button Content="Open File" Click="OpenFile_Button" Background="LightSlateGray" Margin="2,2,2,2" Padding="0,0,0,0"/>
+            <Button Content="Save As" Click="SaveAs_Button" Background="LightSlateGray" Margin="2,2,2,2" Padding="0,0,0,0"/>
+        </StackPanel>
+        <!--Tools-->
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Border Background="DarkSlateGray">
+                <TextBlock Text="Tools" HorizontalAlignment="Center" Margin="3,3,3,3"/>
+            </Border>
+            <Button Content="Reset Position" HorizontalAlignment="Center" Margin="3,3,3,3" Click="ResetPosition_Button"/>
+            <TextBlock Name="ScaleText" Text="Scale: " HorizontalAlignment="Left" Margin="3,3,3,3"
+                Padding="0,0,0,0" VerticalAlignment="Bottom"/>
+            <TextBlock Name="OffsetText" Text="Offset: " HorizontalAlignment="Left" Margin="3,3,3,3"
+                Padding="0,0,0,0" VerticalAlignment="Bottom"/>
+            <TextBlock Text="Tool Select" HorizontalAlignment="Center" Margin="3,3,3,3" Padding="0,0,0,0"/>
+            <RadioButton Content="Pan Tool" Tag="Pan" Checked="RadioButton_Checked" IsChecked="True"/>
+            <RadioButton Content="Pencil Tool" Tag="Pencil" Checked="RadioButton_Checked"/>
+        </StackPanel>
+        <!--Canvas-->
+        <canvas:CanvasControl Grid.Row="1" Grid.Column="1" Name="canvasControl" Draw="CanvasControl_Draw" ClearColor="DimGray" 
+            SizeChanged="Canvas_SizeChanged" PointerMoved="Canvas_PointerMoved" PointerExited="Canvas_PointerExited"
+            PointerPressed="CanvasControl_PointerPressed" PointerWheelChanged="CanvasControl_PointerWheelChanged"
+            PointerReleased="CanvasControl_PointerReleased"/>
+        <!--Info-->
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <TextBlock Name="CanvasSizeText" Text="Canvas Size: " VerticalAlignment="Center" FontSize="12"
+                Padding="0,0,0,0" Margin ="2,2,2,2"/>
+            <TextBlock Name="PointerPosText" Text="Cursor Position: " VerticalAlignment="Center" FontSize="12"
+                Padding="0,0,0,0" Margin="2,2,2,2"/>
+            <TextBlock Name="PointerPosPicText" Text="Cursor PicPosition: " VerticalAlignment="Center" FontSize="12"
+                Padding="0,0,0,0" Margin="2,2,2,2"/>
+        </StackPanel>
+    </Grid>
+</Page>
